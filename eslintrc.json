@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "@tophat/eslint-config"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.test.ts",
+        "*.test.tsx"
+      ],
+      "plugins": [
+        "testing-librbary",
+        "jest-dom"
+      ]
+    }
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
