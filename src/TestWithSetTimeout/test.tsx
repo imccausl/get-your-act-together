@@ -12,7 +12,7 @@ const customRender = (props = {}) => {
     }
 }
 
-it.only('produces an act error', async () => {
+it('produces an act error', async () => {
     const { user } = customRender()
     expect(screen.getByText(/count: 0/i)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /increase count/i }))
