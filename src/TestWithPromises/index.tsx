@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const TestWithSetTimeout: React.FC = () => {
+const TestWithPromises: React.FC = () => {
     const [count, setCount] = useState(0)
 
     return (
@@ -19,4 +19,4 @@ const TestWithSetTimeout: React.FC = () => {
     )
 }
 
-export default TestWithSetTimeout
+export default TestWithPromises
