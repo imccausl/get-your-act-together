@@ -50,7 +50,7 @@ it('produces an act error, but runs setState at the correct time (while the comp
     )
 })
 
-it.only('does not produce an act error', async () => {
+it('does not produce an act error', async () => {
     const { user } = customRender()
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
     await user.type(

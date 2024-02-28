@@ -1,16 +1,19 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import userEvent, { type Options } from '@testing-library/user-event'
 import React from 'react'
 
 import App from '.'
 
-const customRender = (props = {}) => {
-    const user = userEvent.setup({
-        advanceTimers: jest.advanceTimersByTime,
-    })
+const customRender = (
+    config: {
+        props?: Record<string, any>
+        userEventOptions?: Options
+    } = {},
+) => {
+    const user = userEvent.setup(config.userEventOptions)
     return {
         user,
-        ...render(<App {...props} />),
+        ...render(<App {...config.props} />),
     }
 }
 
@@ -30,7 +33,7 @@ describe('with fake timers', () => {
         await user.click(
             screen.getByRole('button', { name: /increase count/i }),
         )
-        await jest.runOnlyPendingTimersAsync()
+        jest.runOnlyPendingTimers()
         expect(screen.getByText(/count: 1/i)).toBeInTheDocument()
     })
 

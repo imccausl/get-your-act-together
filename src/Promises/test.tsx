@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 
@@ -12,10 +12,22 @@ const customRender = (props = {}) => {
     }
 }
 
-it.only('produces an act error', async () => {
+it('produces an error', async () => {
     const { user } = customRender()
     expect(screen.getByText(/count: 0/i)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /increase count/i }))
+    expect(screen.getByText(/count: 1/i)).toBeInTheDocument()
+})
+
+it('uses act on the click action', async () => {
+    const { user } = customRender()
+    expect(screen.getByText(/count: 0/i)).toBeInTheDocument()
+    await act(
+        async () =>
+            await user.click(
+                screen.getByRole('button', { name: /increase count/i }),
+            ),
+    )
     expect(screen.getByText(/count: 1/i)).toBeInTheDocument()
 })
 

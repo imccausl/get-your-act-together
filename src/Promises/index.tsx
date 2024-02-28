@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+const wait = (ms = 1000) => new Promise((resolve) => setTimeout(resolve, ms))
 const TestWithPromises: React.FC = () => {
     const [count, setCount] = useState(0)
 
@@ -9,7 +10,7 @@ const TestWithPromises: React.FC = () => {
             <h2>Press button to increase count</h2>
             <button
                 onClick={() => {
-                    setTimeout(() => setCount(count + 1), 10)
+                    wait().then(() => setCount(count + 1))
                 }}
             >
                 Increase count
